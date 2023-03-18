@@ -13,9 +13,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Spawner extends BukkitRunnable {
     private final Main plugin;
     private final int GRID = 16;
-    // private final int zombiesPerPlayer = 16;
-    private final int MAX_ZOMBIE_GLOBAL = 512;
-    int zombiesPerPlayer;
+    private final int zombiesPerPlayer = 8;
+
     // int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL /
     // plugin.getServer().getOnlinePlayers().size();
 
@@ -25,15 +24,6 @@ public class Spawner extends BukkitRunnable {
 
     @Override
     public void run() {
-        int onlinePlayers = plugin.getServer().getOnlinePlayers().size();
-
-        if (onlinePlayers == 0) {
-            zombiesPerPlayer = 1;
-        } else {
-            zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / onlinePlayers;
-        }
-        System.out.println(
-                onlinePlayers + " player(s) currently online, distributing " + zombiesPerPlayer + " to each player");
         List<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
 
         for (Player p : players) {

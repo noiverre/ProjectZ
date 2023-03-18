@@ -12,7 +12,9 @@ public class Utils {
 
         return (w.getBlockAt(x, y, z).isEmpty()
                 && w.getBlockAt(x, y + 1, z).isEmpty()
-                && w.getBlockAt(x, y + 2, z).isEmpty());
+                && w.getBlockAt(x, y + 2, z).isEmpty()
+                && !w.getBlockAt(x, y -1, z).isEmpty()
+                );
 
     }
 }
