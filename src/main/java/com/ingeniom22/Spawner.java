@@ -1,0 +1,63 @@
+package com.ingeniom22;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
+
+public class Spawner implements Listener {
+    private final Main plugin;
+    private final int GRID = 16;
+    private final int MAX_ZOMBIE = 16;
+
+    public Spawner(Main plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        List<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
+
+        for (Player p : players) {
+            World world = p.getWorld();
+            Location playerLocation = p.getLocation();
+
+            int nearbyZombie = 0;
+            for (Entity e : world.getEntities()) {
+                if (e instanceof Zombie) {
+                    Location zombieLocation = e.getLocation();
+                    double distance = playerLocation.distance(zombieLocation);
+                    if (distance < GRID) {
+                        nearbyZombie++;
+                    }
+                }
+            }
+
+            if (nearbyZombie < MAX_ZOMBIE) {
+                // Get a random location within 10 blocks of the player's location
+                double x = playerLocation.getX() + (Math.random() * 20) - 10;
+                double y = playerLocation.getY() + 2;
+                double z = playerLocation.getZ() + (Math.random() * 20) - 10;
+                Location spawnLocation = new Location(world, x, y, z);
+
+                // Spawn a zombie at the random location
+                if (Utils.canZombieSpawn(spawnLocation)) {
+                    world.spawn(spawnLocation, Zombie.class);
+                    nearbyZombie++;
+                    System.out.println("Spawning zombie nearby " + p.getName() + "at" + x + y + z);
+                } else{
+                    continue;
+                }
+
+            }
+
+        }
+    }
+}
