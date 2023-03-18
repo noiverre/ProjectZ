@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Despawner extends BukkitRunnable {
     private Main plugin;
-    private int maxPlayerDistance = 32;
+    private int maxPlayerDistance = 50;
 
     public Despawner(Main plugin) {
         this.plugin = plugin;

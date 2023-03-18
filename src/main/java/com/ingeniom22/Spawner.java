@@ -8,11 +8,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class Spawner implements Listener {
+public class Spawner extends BukkitRunnable {
     private final Main plugin;
     private final int GRID = 16;
     private final int MAX_ZOMBIE = 16;
@@ -21,8 +19,8 @@ public class Spawner implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
+    @Override
+    public void run() {
         List<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
 
         for (Player p : players) {
@@ -56,9 +54,7 @@ public class Spawner implements Listener {
                     world.spawn(spawnLocation, Zombie.class);
                     nearbyZombie++;
                     System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
-                } else {
-                    continue;
-                }
+                } 
 
             }
 
