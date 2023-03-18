@@ -1,4 +1,4 @@
-package com.ingeniom22.projectz;
+package com.ingeniom22;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,9 @@ public class Spawner extends BukkitRunnable {
     private final int GRID = 16;
     // private final int zombiesPerPlayer = 16;
     private final int MAX_ZOMBIE_GLOBAL = 512;
-    // int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / plugin.getServer().getOnlinePlayers().size();
+    int zombiesPerPlayer;
+    // int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL /
+    // plugin.getServer().getOnlinePlayers().size();
 
     public Spawner(Main plugin) {
         this.plugin = plugin;
@@ -24,8 +26,14 @@ public class Spawner extends BukkitRunnable {
     @Override
     public void run() {
         int onlinePlayers = plugin.getServer().getOnlinePlayers().size();
-        int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / onlinePlayers;
-        System.out.println(onlinePlayers + " player(s) currently online, distributing " + zombiesPerPlayer + " to each player");
+
+        if (onlinePlayers == 0) {
+            zombiesPerPlayer = 1;
+        } else {
+            zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / onlinePlayers;
+        }
+        System.out.println(
+                onlinePlayers + " player(s) currently online, distributing " + zombiesPerPlayer + " to each player");
         List<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
 
         for (Player p : players) {
@@ -61,7 +69,7 @@ public class Spawner extends BukkitRunnable {
                     System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
                 }
 
-            } else{
+            } else {
                 System.out.println("Player " + p.getDisplayName() + " is dealing with " + nearbyZombie + " zombies!");
             }
 
