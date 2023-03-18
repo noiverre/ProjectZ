@@ -1,9 +1,8 @@
 package com.ingeniom22;
 
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityCombustByBlockEvent;
-import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
 
 public class BlockZombieCombust implements Listener {
@@ -14,11 +13,11 @@ public class BlockZombieCombust implements Listener {
     }
 
     @EventHandler
-    public void onZombieBurn(EntityCombustEvent e) {
-        if (!(e instanceof EntityCombustByEntityEvent) && !(e instanceof EntityCombustByBlockEvent)) {
+    public void onEntityCombust(EntityCombustEvent e) {
+        if (e.getEntity() instanceof Zombie) {
             e.setCancelled(true);
         }
-    }
 
+    }
 
 }

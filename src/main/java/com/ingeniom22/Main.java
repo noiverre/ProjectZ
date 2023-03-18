@@ -1,4 +1,4 @@
-package com.ingeniom22.projectz;
+package com.ingeniom22;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +11,7 @@ public class Main extends JavaPlugin {
         getLogger().info("=====[ProjectZ @ingenio]=====");
 
         getServer().getPluginManager().registerEvents(new BlockNaturalSpawn(this), this);
+        getServer().getPluginManager().registerEvents(new BlockZombieCombust(this), this);
 
         spawner = new Spawner(this);
         spawner.runTaskTimer(this, 1, 20);
