@@ -14,8 +14,9 @@ public class BlockZombieCombust implements Listener {
 
     @EventHandler
     public void onEntityCombust(EntityCombustEvent e) {
-        if (e.getEntity() instanceof Zombie) {
+        if (e.getEntity() instanceof Zombie && e.getEntity().getFireTicks() != 0) {
             e.setCancelled(true);
+            e.getEntity().setFireTicks(0);
         }
 
     }
