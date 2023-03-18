@@ -42,13 +42,13 @@ public class Spawner implements Listener {
 
             if (nearbyZombie < MAX_ZOMBIE) {
                 // Get a random location within 10 blocks of the player's location
-                double x = playerLocation.getX() + (Math.random() * 20) - 10;
-                double y = playerLocation.getY() + 2;
-                double z = playerLocation.getZ() + (Math.random() * 20) - 10;
+                double x = playerLocation.getX() + (Math.random() * 48) - 24;
+                double y = playerLocation.getY() + 1;
+                double z = playerLocation.getZ() + (Math.random() * 48) - 24;
                 Location spawnLocation = new Location(world, x, y, z);
 
                 // Spawn a zombie at the random location
-                if (Utils.canZombieSpawn(spawnLocation)) {
+                if (Utils.canZombieSpawn(spawnLocation) && playerLocation.distance(spawnLocation) > 16) {
                     world.spawn(spawnLocation, Zombie.class);
                     nearbyZombie++;
                     System.out.println("Spawning zombie nearby " + p.getName() + "at" + x + y + z);
