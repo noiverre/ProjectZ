@@ -55,7 +55,7 @@ public class Spawner implements Listener {
                 if (Utils.canZombieSpawn(spawnLocation) && playerLocation.distance(spawnLocation) > 16) {
                     world.spawn(spawnLocation, Zombie.class);
                     nearbyZombie++;
-                    System.out.println("Spawning zombie nearby " + p.getName() + "at" + x + y + z);
+                    System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
                 } else {
                     continue;
                 }
