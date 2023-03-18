@@ -1,4 +1,4 @@
-package com.ingeniom22;
+package com.ingeniom22.projectz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Spawner extends BukkitRunnable {
     private final Main plugin;
     private final int GRID = 16;
-    private final int MAX_ZOMBIE = 16;
+    // private final int zombiesPerPlayer = 16;
+    private final int MAX_ZOMBIE_GLOBAL = 512;
+    // int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / plugin.getServer().getOnlinePlayers().size();
 
     public Spawner(Main plugin) {
         this.plugin = plugin;
@@ -21,6 +23,9 @@ public class Spawner extends BukkitRunnable {
 
     @Override
     public void run() {
+        int onlinePlayers = plugin.getServer().getOnlinePlayers().size();
+        int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL / onlinePlayers;
+        System.out.println(onlinePlayers + " player(s) currently online, distributing " + zombiesPerPlayer + " to each player");
         List<Player> players = new ArrayList<>(plugin.getServer().getOnlinePlayers());
 
         for (Player p : players) {
@@ -40,7 +45,7 @@ public class Spawner extends BukkitRunnable {
             }
 
             // spawn zombie if less than threshold
-            if (nearbyZombie < MAX_ZOMBIE) {
+            if (nearbyZombie < zombiesPerPlayer) {
                 // Get a random location within 24 blocks of the player's location
                 double x = playerLocation.getX() + (Math.random() * 48) - 24;
                 double y = playerLocation.getY() + 1;
@@ -54,8 +59,10 @@ public class Spawner extends BukkitRunnable {
                     world.spawn(spawnLocation, Zombie.class);
                     nearbyZombie++;
                     System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
-                } 
+                }
 
+            } else{
+                System.out.println("Player " + p.getDisplayName() + " is dealing with " + nearbyZombie + " zombies!");
             }
 
         }

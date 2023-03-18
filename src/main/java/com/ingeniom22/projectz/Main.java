@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.ingeniom22;
+package com.ingeniom22.projectz;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,7 +8,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("The projectz plugin has been loaded");
+        getLogger().info("=====[ProjectZ @ingenio]=====");
 
         getServer().getPluginManager().registerEvents(new BlockNaturalSpawn(this), this);
 
@@ -25,7 +21,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("The projectz plugin has been unloaded");
+        getLogger().info("=====[Goodbye :D]=====");
     }
 
 }
