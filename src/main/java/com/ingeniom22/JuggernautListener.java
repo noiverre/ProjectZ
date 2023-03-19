@@ -1,0 +1,35 @@
+package com.ingeniom22;
+
+import org.bukkit.Effect;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+public class JuggernautListener implements Listener {
+    private final Main plugin;
+
+    public JuggernautListener(Main plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType() == EntityType.ZOMBIE) {
+            Zombie zombie = (Zombie) event.getDamager();
+            if (zombie.getCustomName() != null && zombie.getCustomName().equals("Juggernaut")) {
+                if (event.getEntity() instanceof Player) {
+                    Player player = (Player) event.getEntity();
+                    player.getWorld().playEffect(player.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
+                    player.setVelocity(player.getLocation().getDirection().multiply(0).setY(5));
+                    System.out.println("Juggernaut knocked player up");
+                }
+            }
+        }
+    }
+
+}
