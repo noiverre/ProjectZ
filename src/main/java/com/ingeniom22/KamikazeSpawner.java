@@ -37,7 +37,7 @@ public class KamikazeSpawner extends BukkitRunnable {
             // get initial count of nearby kamikaze
             int nearbyKamikaze = 0;
             for (Entity e : world.getEntities()) {
-                if (e instanceof Zombie && e.getCustomName() != null && e.getCustomName().equals("kamikaze")) {
+                if (e instanceof Zombie && e.getCustomName() != null && e.getCustomName().equals("Kamikaze")) {
                     Location kamikazeLocation = e.getLocation();
                     double distance = playerLocation.distance(kamikazeLocation);
                     if (distance < GRID) {
@@ -64,7 +64,7 @@ public class KamikazeSpawner extends BukkitRunnable {
                     kamikaze.setCustomNameVisible(true);
                     kamikaze.setHealth(10);
                     kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
-                    kamikaze.getEquipment().setHelmet((new ItemStack(Material.TURTLE_HELMET)));
+                    kamikaze.getEquipment().setHelmet((new ItemStack(Material.GOLDEN_HELMET)));
                     System.out.println("Spawning Kamikaze nearby " + p.getName() + "at " + spawnLocation.toString());
                 }
 
