@@ -3,6 +3,7 @@ package com.ingeniom22;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -11,7 +12,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
-
 
 public class JuggernautListener implements Listener {
     private final Main plugin;
@@ -25,23 +25,19 @@ public class JuggernautListener implements Listener {
         if (event.getDamager().getType() == EntityType.ZOMBIE) {
             Zombie zombie = (Zombie) event.getDamager();
             if (zombie.getCustomName() != null && zombie.getCustomName().equals("Juggernaut")) {
-                if (event.getEntity() instanceof Player) {
-                    Player player = (Player) event.getEntity();
-                    player.getWorld().playEffect(player.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
-                    Vector knockup = new Vector(0, 2.5, 0);
-                    
-                    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                        public void run() {
-                            // Set the velocity of the player after the delay
-                            player.setVelocity(zombie.getLocation().getDirection().add(knockup));
-                            System.out.println("Knocked player up");
-                        }
-                    }, 2);
+                Entity entity = event.getEntity();
+                entity.getWorld().playEffect(entity.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
+                Vector knockup = new Vector(0, 1.2, 0);
 
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    public void run() {
+                        // Set the velocity of the player after the delay
+                        entity.setVelocity(zombie.getLocation().getDirection().add(knockup));
+                        System.out.println("Knocked player up");
+                    }
+                }, 2);
 
-                }
             }
         }
     }
-
 }
