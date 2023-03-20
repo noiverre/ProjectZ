@@ -3,6 +3,7 @@ package com.ingeniom22;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,6 +12,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class JuggernautSpawner extends BukkitRunnable {
@@ -55,11 +59,12 @@ public class JuggernautSpawner extends BukkitRunnable {
                 // is greater than 16
                 if (Utils.canZombieSpawn(spawnLocation) && playerLocation.distance(spawnLocation) > 16) {
                     Zombie juggernaut = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
+                    juggernaut.setMetadata("type", new FixedMetadataValue(plugin, "juggernaut"));
                     juggernaut.setCustomName("Juggernaut");
                     juggernaut.setCustomNameVisible(true);
                     juggernaut.setHealth(20);
+                    juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
                     juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
-                    nearbyJuggernaut++;
                     System.out.println("Spawning Juggernaut nearby " + p.getName() + "at " + spawnLocation.toString());
                 }
 

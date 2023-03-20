@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.util.Vector;
 
 public class JuggernautListener implements Listener {
     private final Main plugin;
@@ -25,8 +26,10 @@ public class JuggernautListener implements Listener {
                 if (event.getEntity() instanceof Player) {
                     Player player = (Player) event.getEntity();
                     player.getWorld().playEffect(player.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
-                    player.setVelocity(player.getLocation().getDirection().multiply(0).setY(5));
-                    System.out.println("Juggernaut knocked player up");
+
+                    Vector knockup = new Vector(0, 2.5, 0);
+                    player.setVelocity(zombie.getLocation().getDirection().add(knockup));
+                    System.out.println("Juggernaut knocked player up to " + knockup.toString());
                 }
             }
         }
