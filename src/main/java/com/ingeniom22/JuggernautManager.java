@@ -34,13 +34,13 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
     }
 
     public void spawnJuggernaut(World world, Location spawnLocation, Plugin plugin, Player player) {
-        Zombie juggernaut = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
-        juggernaut.setMetadata("type", new FixedMetadataValue(plugin, "Juggernaut"));
-        juggernaut.setCustomName("Juggernaut");
-        juggernaut.setCustomNameVisible(true);
-        juggernaut.setHealth(20);
-        juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
-        juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
+        Zombie Juggernaut = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
+        Juggernaut.setMetadata("type", new FixedMetadataValue(plugin, "Juggernaut"));
+        Juggernaut.setCustomName("Juggernaut");
+        Juggernaut.setCustomNameVisible(true);
+        Juggernaut.setHealth(20);
+        Juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
+        Juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
         System.out.println("Spawning Juggernaut near " + player.getName() + " at " + spawnLocation.toString());
     }
 
@@ -68,7 +68,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (isJuggernaut(event.getDamager())) {
-            Zombie juggernaut = (Zombie) event.getDamager();
+            Zombie Juggernaut = (Zombie) event.getDamager();
             Entity entity = event.getEntity();
             entity.getWorld().playEffect(entity.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
             Vector knockup = new Vector(0, 1.2, 0);
@@ -76,7 +76,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 public void run() {
                     // Set the velocity of the player after the delay
-                    entity.setVelocity(juggernaut.getLocation().getDirection().add(knockup));
+                    entity.setVelocity(Juggernaut.getLocation().getDirection().add(knockup));
                     System.out.println("Knocked player up");
                 }
             }, 2);
@@ -91,7 +91,6 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
             Location playerLocation = p.getLocation();
 
             // get initial count of nearby Juggernaut
-            // spawn Juggernaut if less than threshold
             int nearbyJuggernaut = getNearbyJuggernautCount(world, playerLocation, GRID);
             if (nearbyJuggernaut < juggernautsPerPlayer) {
                 // Get a random location within 32 blocks of the player's location

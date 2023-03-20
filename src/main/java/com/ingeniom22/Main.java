@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
     private Spawner spawner;
     private JuggernautManager juggernautManager;
-    private KamikazeSpawner kamikazeSpawner;
+    private KamikazeManager kamikazeManager;
     private Despawner despawner;
 
     @Override
@@ -15,19 +15,19 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockNaturalSpawn(this), this);
         getServer().getPluginManager().registerEvents(new BlockZombieCombust(this), this);
         getServer().getPluginManager().registerEvents(new JuggernautManager(this), this);
-        getServer().getPluginManager().registerEvents(new KamikazeListener(this), this);
+        getServer().getPluginManager().registerEvents(new KamikazeManager(this), this);
 
         spawner = new Spawner(this);
-        spawner.runTaskTimer(this, 1, 20);
+        spawner.runTaskTimer(this, 0, 20);
 
         juggernautManager = new JuggernautManager(this);
         juggernautManager.runTaskTimer(this, 0, 20);
 
-        kamikazeSpawner = new KamikazeSpawner(this);
-        kamikazeSpawner.runTaskTimer(this, 1, 20);
+        kamikazeManager = new KamikazeManager(this);
+        kamikazeManager.runTaskTimer(this, 0, 20);
 
         despawner = new Despawner(this);
-        despawner.runTaskTimer(this, 1, 20);
+        despawner.runTaskTimer(this, 0, 20);
     }
 
     @Override
