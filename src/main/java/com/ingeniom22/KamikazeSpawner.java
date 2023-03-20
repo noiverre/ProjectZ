@@ -37,7 +37,9 @@ public class KamikazeSpawner extends BukkitRunnable {
             // get initial count of nearby kamikaze
             int nearbyKamikaze = 0;
             for (Entity e : world.getEntities()) {
-                if (e instanceof Zombie && e.getCustomName() != null && e.getCustomName().equals("Kamikaze")) {
+                if (e instanceof Zombie
+                        && e.getCustomName() != null
+                        && e.getCustomName().equals("Kamikaze")) {
                     Location kamikazeLocation = e.getLocation();
                     double distance = playerLocation.distance(kamikazeLocation);
                     if (distance < GRID) {
@@ -45,6 +47,7 @@ public class KamikazeSpawner extends BukkitRunnable {
                     }
                 }
             }
+
 
             // spawn kamikaze if less than threshold
             if (nearbyKamikaze < kamikazesPerPlayer) {
@@ -57,7 +60,9 @@ public class KamikazeSpawner extends BukkitRunnable {
                 // Spawn a kamikaze at the random location if block is
                 // spawnable and distance with player
                 // is greater than 16
-                if (Utils.canZombieSpawn(spawnLocation) && playerLocation.distance(spawnLocation) > 16) {
+                if (Utils.canZombieSpawn(spawnLocation)
+                        && playerLocation.distance(spawnLocation) > 16) {
+                            
                     Zombie kamikaze = (Zombie) world.spawnEntity(spawnLocation, EntityType.ZOMBIE);
                     kamikaze.setMetadata("type", new FixedMetadataValue(plugin, "kamikaze"));
                     kamikaze.setCustomName("Kamikaze");

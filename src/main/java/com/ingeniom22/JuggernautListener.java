@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.metadata.MetadataValueAdapter;
 import org.bukkit.util.Vector;
 
 public class JuggernautListener implements Listener {
@@ -20,24 +21,29 @@ public class JuggernautListener implements Listener {
         this.plugin = plugin;
     }
 
+    public boolean isJuggernaut(Entity entity) {
+        if (entity.hasMetadata("type")) {
+            return entity.getMetadata("type").get(0).asString().equals("Juggernaut");
+        }
+        return false;
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager().getType() == EntityType.ZOMBIE) {
-            Zombie zombie = (Zombie) event.getDamager();
-            if (zombie.getCustomName() != null && zombie.getCustomName().equals("Juggernaut")) {
-                Entity entity = event.getEntity();
-                entity.getWorld().playEffect(entity.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
-                Vector knockup = new Vector(0, 1.2, 0);
+        if (isJuggernaut(event.getDamager())) {
+            Zombie juggernaut = (Zombie) event.getDamager();
+            Entity entity = event.getEntity();
+            entity.getWorld().playEffect(entity.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
+            Vector knockup = new Vector(0, 1.2, 0);
 
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                    public void run() {
-                        // Set the velocity of the player after the delay
-                        entity.setVelocity(zombie.getLocation().getDirection().add(knockup));
-                        System.out.println("Knocked player up");
-                    }
-                }, 2);
+            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                public void run() {
+                    // Set the velocity of the player after the delay
+                    entity.setVelocity(juggernaut.getLocation().getDirection().add(knockup));
+                    System.out.println("Knocked player up");
+                }
+            }, 2);
 
-            }
         }
     }
 }
