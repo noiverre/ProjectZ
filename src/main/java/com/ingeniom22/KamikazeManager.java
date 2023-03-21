@@ -36,7 +36,8 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         Kamikaze.setCustomName("Kamikaze");
         Kamikaze.setCustomNameVisible(true);
         Kamikaze.setHealth(10);
-        Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+        Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+        Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
         Kamikaze.getEquipment().setHelmet((new ItemStack(Material.GOLDEN_HELMET)));
         System.out.println("Spawning Kamikaze near " + player.getName() + " at " + spawnLocation.toString());
     }
@@ -62,7 +63,7 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if (isKamikaze(event.getEntity())) {
             Location loc = event.getEntity().getLocation();
-            loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_DEATH, 5, 2);
+            loc.getWorld().playSound(loc, Sound.AMBIENT_CAVE, 5, 2);
 
             new BukkitRunnable() {
                 @Override
