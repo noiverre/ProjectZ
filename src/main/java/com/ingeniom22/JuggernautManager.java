@@ -51,15 +51,11 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
         return false;
     }
 
-    public int getNearbyJuggernautCount(World world, Location playerLocation, double gridDistance) {
+    public int getNearbyJuggernautCount(World world, Player player, double gridDistance) {
         int nearbyJuggernauts = 0;
-        for (Entity entity : world.getEntities()) {
+        for (Entity entity : player.getNearbyEntities(gridDistance * 2, gridDistance*2, gridDistance * 2)) {
             if (isJuggernaut(entity)) {
-                Location entityLocation = entity.getLocation();
-                double distance = playerLocation.distance(entityLocation);
-                if (distance < gridDistance) {
-                    nearbyJuggernauts++;
-                }
+                nearbyJuggernauts++;
             }
         }
         return nearbyJuggernauts;
@@ -91,7 +87,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
             Location playerLocation = p.getLocation();
 
             // get initial count of nearby Juggernaut
-            int nearbyJuggernaut = getNearbyJuggernautCount(world, playerLocation, GRID);
+            int nearbyJuggernaut = getNearbyJuggernautCount(world, p, GRID);
             if (nearbyJuggernaut < juggernautsPerPlayer) {
                 // Get a random location within 32 blocks of the player's location
                 double x = playerLocation.getX() + (Math.random() * 64) - 32;

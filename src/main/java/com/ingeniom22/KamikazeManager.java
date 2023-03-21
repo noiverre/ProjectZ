@@ -48,15 +48,11 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         return false;
     }
 
-    public int getNearbyKamikazeCount(World world, Location playerLocation, double gridDistance) {
+    public int getNearbyKamikazeCount(World world, Player player, double gridDistance) {
         int nearbyKamikazes = 0;
-        for (Entity entity : world.getEntities()) {
+        for (Entity entity : player.getNearbyEntities(gridDistance * 2, gridDistance * 2, gridDistance * 2)) {
             if (isKamikaze(entity)) {
-                Location entityLocation = entity.getLocation();
-                double distance = playerLocation.distance(entityLocation);
-                if (distance < gridDistance) {
-                    nearbyKamikazes++;
-                }
+                nearbyKamikazes++;
             }
         }
         return nearbyKamikazes;
@@ -87,7 +83,7 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
             Location playerLocation = p.getLocation();
 
             // get initial count of nearby Kamikaze
-            int nearbyKamikaze = getNearbyKamikazeCount(world, playerLocation, GRID);
+            int nearbyKamikaze = getNearbyKamikazeCount(world, p, GRID);
             if (nearbyKamikaze < KamikazesPerPlayer) {
                 // Get a random location within 32 blocks of the player's location
                 double x = playerLocation.getX() + (Math.random() * 64) - 32;

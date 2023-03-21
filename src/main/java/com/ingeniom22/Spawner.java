@@ -32,7 +32,7 @@ public class Spawner extends BukkitRunnable {
 
             // get initial count of nearby zombie
             int nearbyZombie = 0;
-            for (Entity e : p.getNearbyEntities(GRID * 2, 10, GRID * 2)) {
+            for (Entity e : p.getNearbyEntities(GRID * 2, GRID*2, GRID * 2)) {
                 if (e instanceof Zombie) {
                     nearbyZombie++;
                 }
