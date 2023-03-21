@@ -19,16 +19,18 @@ public class Despawner extends BukkitRunnable {
     public void run() {
         List<World> world = plugin.getServer().getWorlds();
         for (World w : world) {
-            for (Entity e : w.getEntitiesByClass(Zombie.class)) {
-                boolean playerNearby = e.getWorld().getPlayers().stream()
-                        .anyMatch(p -> p.getLocation().distance(e.getLocation()) < maxPlayerDistance);
+            for (Entity e : w.getLivingEntities()) {
+                if (e instanceof Zombie) {
+                    boolean playerNearby = e.getWorld().getPlayers().stream()
+                            .anyMatch(p -> p.getLocation().distance(e.getLocation()) < maxPlayerDistance);
 
-                if (!playerNearby) {
-                    e.remove();
-                    System.out.println("Despawning zombie at " + e.getLocation().toString());
+                    if (!playerNearby) {
+                        e.remove();
+                        System.out.println("Despawning zombie at " + e.getLocation().toString());
+                    }
                 }
             }
         }
-    }
 
+    }
 }

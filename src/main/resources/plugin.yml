@@ -2,7 +2,7 @@ api: 3.0.0
 api-version: 1.19
 name: projectz
 version: 1.2.1-SNAPSHOT
-description: This is a simple Bukkit Plugin
+description: Custom zombie and more 
 author: ingeniom22
 
 main: com.ingeniom22.Main
