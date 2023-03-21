@@ -1,4 +1,5 @@
-api: []
+api: 3.0.0
+api-version: 1.19.3
 name: projectz
 version: 1.0-SNAPSHOT
 description: This is a simple Bukkit Plugin
