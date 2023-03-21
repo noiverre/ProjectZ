@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.kingdoms.constants.land.Land;
 
 public class KamikazeManager extends BukkitRunnable implements Listener {
     private final Main plugin;
@@ -63,16 +64,16 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if (isKamikaze(event.getEntity())) {
             Location loc = event.getEntity().getLocation();
-            loc.getWorld().playSound(loc, Sound.AMBIENT_CAVE, 5, 2);
-
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    loc.getBlock().setType(Material.AIR);
-                    loc.getWorld().playSound(loc, Sound.ENTITY_ZOMBIE_DEATH, 5, 2);
-                    loc.getWorld().createExplosion(loc, 4);
-                }
-            }.runTaskLater(plugin, 60); // 3 seconds = 60 ticks
+            Land land = Land.getLand(loc);
+            loc.getWorld().playSound(loc, Sound.AMBIENT_CAVE, 7, 2);
+            if (!(land != null && land.isClaimed())) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        loc.getWorld().createExplosion(loc, 4);
+                    }
+                }.runTaskLater(plugin, 60); // 3 seconds = 60 ticks
+            }
         }
     }
 
