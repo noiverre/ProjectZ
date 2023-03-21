@@ -27,7 +27,7 @@ replay_pid*
 /.vscode/
 /.idea/
 /out/
-/target/
+/target/**
 
 # maven stuff
 /maven-archiver/*
