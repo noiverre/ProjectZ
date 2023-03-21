@@ -7,8 +7,7 @@ author: ingeniom22
 
 main: com.ingeniom22.Main
 
-softdepend:
-- Kingdoms
+softdepend: [Kingdoms]
 
 commands:
   Hello:
