@@ -14,6 +14,7 @@ public class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new BlockNaturalSpawn(this), this);
         getServer().getPluginManager().registerEvents(new BlockZombieCombust(this), this);
+        getServer().getPluginManager().registerEvents(new BlockDrowned(this), this);
         getServer().getPluginManager().registerEvents(new JuggernautManager(this), this);
         getServer().getPluginManager().registerEvents(new KamikazeManager(this), this);
 
