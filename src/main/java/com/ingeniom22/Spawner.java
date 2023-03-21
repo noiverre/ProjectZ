@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Spawner extends BukkitRunnable {
     private final Main plugin;
-    private final int GRID = 16;
+    private final int GRID = 25;
     private final int zombiesPerPlayer = 8;
 
     // int zombiesPerPlayer = MAX_ZOMBIE_GLOBAL /
