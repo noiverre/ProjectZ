@@ -6,6 +6,7 @@ public class Main extends JavaPlugin {
     private Spawner spawner;
     private JuggernautManager juggernautManager;
     private KamikazeManager kamikazeManager;
+    private GrapplerManager grapplerManager;
     private Despawner despawner;
 
     @Override
@@ -17,6 +18,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockDrowned(this), this);
         getServer().getPluginManager().registerEvents(new JuggernautManager(this), this);
         getServer().getPluginManager().registerEvents(new KamikazeManager(this), this);
+        getServer().getPluginManager().registerEvents(new GrapplerManager(this), this);
 
         spawner = new Spawner(this);
         spawner.runTaskTimer(this, 0, 20);
@@ -26,6 +28,9 @@ public class Main extends JavaPlugin {
 
         kamikazeManager = new KamikazeManager(this);
         kamikazeManager.runTaskTimer(this, 0, 20);
+
+        grapplerManager = new GrapplerManager(this);
+        grapplerManager.runTaskTimer(this, 0, 20);
 
         despawner = new Despawner(this);
         despawner.runTaskTimer(this, 0, 20);
