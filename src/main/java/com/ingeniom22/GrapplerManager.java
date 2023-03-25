@@ -38,10 +38,11 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
         Grappler.setMetadata("type", new FixedMetadataValue(plugin, "Grappler"));
         Grappler.setCustomName("Grappler");
         Grappler.setCustomNameVisible(true);
+        Grappler.setHealth(5);
         Grappler.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         // modifiables
-        Grappler.setHealth(20);
         Grappler.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
+        Grappler.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 2));
         Grappler.getEquipment().setHelmet((new ItemStack(Material.JACK_O_LANTERN)));
         System.out.println("Spawning Grappler near " + player.getName() + " at " + spawnLocation.toString());
     }
