@@ -38,7 +38,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
         Juggernaut.setMetadata("type", new FixedMetadataValue(plugin, "Juggernaut"));
         Juggernaut.setCustomName("Juggernaut");
         Juggernaut.setCustomNameVisible(true);
-        Juggernaut.setHealth(20);
+        Juggernaut.setHealth(30);
         Juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
         Juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
         // System.out.println("Spawning Juggernaut near " + player.getName() + " at " + spawnLocation.toString());
@@ -67,7 +67,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
             Zombie Juggernaut = (Zombie) event.getDamager();
             Entity entity = event.getEntity();
             entity.getWorld().playEffect(entity.getLocation(), Effect.STEP_SOUND, Material.IRON_BLOCK);
-            Vector knockup = new Vector(0, 1.2, 0);
+            Vector knockup = new Vector(0, 1.05, 0);
 
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 public void run() {

@@ -37,8 +37,8 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         Kamikaze.setMetadata("type", new FixedMetadataValue(plugin, "Kamikaze"));
         Kamikaze.setCustomName("Kamikaze");
         Kamikaze.setCustomNameVisible(true);
-        Kamikaze.setHealth(10);
-        Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+        Kamikaze.setHealth(5);
+        //Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
         Kamikaze.getEquipment().setHelmet((new ItemStack(Material.GOLDEN_HELMET)));
         // System.out.println("Spawning Kamikaze near " + player.getName() + " at " +
