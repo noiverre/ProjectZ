@@ -52,11 +52,11 @@ public class Spawner extends BukkitRunnable {
                 if (Utils.canZombieSpawn(spawnLocation) && playerLocation.distance(spawnLocation) > 16) {
                     world.spawn(spawnLocation, Zombie.class);
                     nearbyZombie++;
-                    System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
+                    // System.out.println("Spawning zombie nearby " + p.getName() + "at " + spawnLocation.toString());
                 }
 
             } else {
-                System.out.println("Player " + p.getDisplayName() + " is dealing with " + nearbyZombie + " zombies!");
+                // System.out.println("Player " + p.getDisplayName() + " is dealing with " + nearbyZombie + " zombies!");
             }
 
         }

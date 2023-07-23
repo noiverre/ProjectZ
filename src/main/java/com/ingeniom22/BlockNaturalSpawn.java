@@ -19,7 +19,7 @@ public class BlockNaturalSpawn implements Listener {
         if (event.getEntityType() == EntityType.ZOMBIE && event.getSpawnReason() == SpawnReason.NATURAL) {
             // Cancel the spawn event if it's a natural zombie spawn
             event.setCancelled(true);
-            System.out.println("Blocked natural spawn of " + event.toString());
+            // System.out.println("Blocked natural spawn of " + event.toString());
         }
     }
 

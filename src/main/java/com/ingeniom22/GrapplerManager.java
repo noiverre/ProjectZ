@@ -43,7 +43,8 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
         Grappler.setHealth(20);
         Grappler.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2));
         Grappler.getEquipment().setHelmet((new ItemStack(Material.JACK_O_LANTERN)));
-        System.out.println("Spawning Grappler near " + player.getName() + " at " + spawnLocation.toString());
+        // System.out.println("Spawning Grappler near " + player.getName() + " at " +
+        // spawnLocation.toString());
     }
 
     public boolean isGrappler(Entity entity) {
@@ -82,7 +83,7 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
                             Vector pull = drowned.getLocation().getDirection().multiply(-1.25)
                                     .add(new Vector(0, 0.5, 0));
                             entity.setVelocity(pull);
-                            System.out.println("Grappler used pulled " + pull.toString());
+                            // System.out.println("Grappler used pulled " + pull.toString());
                         }
                     }, 2);
                 }
@@ -113,9 +114,6 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
                     spawnGrappler(world, spawnLocation, plugin, p);
                 }
 
-            } else {
-                System.out.println(
-                        "Player " + p.getDisplayName() + " is dealing with " + nearbyGrappler + " Grapplers!");
             }
 
         }

@@ -41,7 +41,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
         Juggernaut.setHealth(20);
         Juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
         Juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
-        System.out.println("Spawning Juggernaut near " + player.getName() + " at " + spawnLocation.toString());
+        // System.out.println("Spawning Juggernaut near " + player.getName() + " at " + spawnLocation.toString());
     }
 
     public boolean isJuggernaut(Entity entity) {
@@ -53,7 +53,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
 
     public int getNearbyJuggernautCount(World world, Player player, double gridDistance) {
         int nearbyJuggernauts = 0;
-        for (Entity entity : player.getNearbyEntities(gridDistance * 2, gridDistance*2, gridDistance * 2)) {
+        for (Entity entity : player.getNearbyEntities(gridDistance * 2, gridDistance * 2, gridDistance * 2)) {
             if (isJuggernaut(entity)) {
                 nearbyJuggernauts++;
             }
@@ -73,7 +73,7 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
                 public void run() {
                     // Set the velocity of the player after the delay
                     entity.setVelocity(Juggernaut.getLocation().getDirection().add(knockup));
-                    System.out.println("Knocked player up");
+                    // System.out.println("Knocked player up");
                 }
             }, 2);
         }
@@ -102,9 +102,6 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
                     spawnJuggernaut(world, spawnLocation, plugin, p);
                 }
 
-            } else {
-                System.out.println(
-                        "Player " + p.getDisplayName() + " is dealing with " + nearbyJuggernaut + " Juggernauts!");
             }
 
         }

@@ -26,7 +26,8 @@ public class Despawner extends BukkitRunnable {
 
                     if (!playerNearby) {
                         e.remove();
-                        System.out.println("Despawning" + e.toString() + "at " + e.getLocation().toString());
+                        // System.out.println("Despawning" + e.toString() + "at " +
+                        // e.getLocation().toString());
                     }
                 }
             }

@@ -3,6 +3,7 @@ package com.ingeniom22;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -40,7 +41,8 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
         Kamikaze.getEquipment().setHelmet((new ItemStack(Material.GOLDEN_HELMET)));
-        System.out.println("Spawning Kamikaze near " + player.getName() + " at " + spawnLocation.toString());
+        // System.out.println("Spawning Kamikaze near " + player.getName() + " at " +
+        // spawnLocation.toString());
     }
 
     public boolean isKamikaze(Entity entity) {
@@ -67,12 +69,12 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
             Land land = Land.getLand(loc);
             loc.getWorld().playSound(loc, Sound.AMBIENT_CAVE, 7, 2);
             if (!(land != null && land.isClaimed())) {
-                new BukkitRunnable() {
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
                         loc.getWorld().createExplosion(loc, 4);
                     }
-                }.runTaskLater(plugin, 60); // 3 seconds = 60 ticks
+                }, 60); // 3 seconds = 60 ticks
             }
         }
     }
@@ -100,9 +102,6 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
                     spawnKamikaze(world, spawnLocation, plugin, p);
                 }
 
-            } else {
-                System.out.println(
-                        "Player " + p.getDisplayName() + " is dealing with " + nearbyKamikaze + " Kamikazes!");
             }
 
         }

@@ -1,0 +1,12 @@
+# WIP, might break later
+juggernaut:
+  - health: 40
+  - slow: 2
+
+kamikaze:
+  - health: 20
+  - speed: 1
+
+grappler:
+  - health: 20
+  - slow: 1
