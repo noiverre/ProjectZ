@@ -38,7 +38,8 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         Kamikaze.setCustomName("Kamikaze");
         Kamikaze.setCustomNameVisible(true);
         Kamikaze.setHealth(5);
-        //Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+        // Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+        // Integer.MAX_VALUE, 1));
         Kamikaze.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
         Kamikaze.getEquipment().setHelmet((new ItemStack(Material.GOLDEN_HELMET)));
         // System.out.println("Spawning Kamikaze near " + player.getName() + " at " +
@@ -67,12 +68,12 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
         if (isKamikaze(event.getEntity())) {
             Location loc = event.getEntity().getLocation();
             Land land = Land.getLand(loc);
-            loc.getWorld().playSound(loc, Sound.AMBIENT_CAVE, 7, 2);
+            loc.getWorld().playSound(loc, Sound.ENTITY_CREEPER_PRIMED, 7, 3);
             if (!(land != null && land.isClaimed())) {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        loc.getWorld().createExplosion(loc, 4);
+                        loc.getWorld().createExplosion(loc, 2);
                     }
                 }, 60); // 3 seconds = 60 ticks
             }

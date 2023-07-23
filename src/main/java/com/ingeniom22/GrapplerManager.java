@@ -2,6 +2,8 @@ package com.ingeniom22;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SplittableRandom;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,6 +29,7 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
     private final Main plugin;
     private final int GRID = 25;
     private final int GrapplersPerPlayer = 1;
+    SplittableRandom random = new SplittableRandom();
 
     public GrapplerManager(Main plugin) {
         this.plugin = plugin;
@@ -77,7 +80,7 @@ public class GrapplerManager extends BukkitRunnable implements Listener {
             if (trident.getShooter() instanceof Drowned) {
                 Drowned drowned = (Drowned) trident.getShooter();
                 // check if the drowned is a Grappler
-                if (isGrappler(drowned)) {
+                if (isGrappler(drowned) && random.nextInt(5) == 0) {
                     Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
                             // Set the velocity of the entity after the delay

@@ -41,7 +41,8 @@ public class JuggernautManager extends BukkitRunnable implements Listener {
         Juggernaut.setHealth(30);
         Juggernaut.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
         Juggernaut.getEquipment().setHelmet((new ItemStack(Material.IRON_HELMET)));
-        // System.out.println("Spawning Juggernaut near " + player.getName() + " at " + spawnLocation.toString());
+        // System.out.println("Spawning Juggernaut near " + player.getName() + " at " +
+        // spawnLocation.toString());
     }
 
     public boolean isJuggernaut(Entity entity) {

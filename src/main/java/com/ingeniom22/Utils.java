@@ -14,8 +14,7 @@ public class Utils {
         int z = l.getBlockZ();
         Land land = Land.getLand(l);
 
-        return (!(land != null && land.isClaimed())
-                && w.getBlockAt(x, y, z).isEmpty()
+        return (w.getBlockAt(x, y, z).isEmpty()
                 && w.getBlockAt(x, y + 1, z).isEmpty()
                 && w.getBlockAt(x, y + 2, z).isEmpty()
                 && !w.getBlockAt(x, y - 1, z).isEmpty());
