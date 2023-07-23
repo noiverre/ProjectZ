@@ -21,7 +21,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.kingdoms.constants.land.Land;
 
 public class KamikazeManager extends BukkitRunnable implements Listener {
     private final Main plugin;
@@ -67,16 +66,14 @@ public class KamikazeManager extends BukkitRunnable implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if (isKamikaze(event.getEntity())) {
             Location loc = event.getEntity().getLocation();
-            Land land = Land.getLand(loc);
             loc.getWorld().playSound(loc, Sound.ENTITY_CREEPER_PRIMED, 7, 3);
-            if (!(land != null && land.isClaimed())) {
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        loc.getWorld().createExplosion(loc, 2);
-                    }
-                }, 60); // 3 seconds = 60 ticks
-            }
+
+            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    loc.getWorld().createExplosion(loc, 2);
+                }
+            }, 60); // 3 seconds = 60 ticks
         }
     }
 
